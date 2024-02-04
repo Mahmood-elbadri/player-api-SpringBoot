@@ -1,0 +1,51 @@
+package com.spring.playerapi.service;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import com.spring.playerapi.dao.PlayerDAO;
+import com.spring.playerapi.model.Player;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+@Service
+public class PlayerServiceImpl implements PlayerService {
+
+	@Autowired
+	private PlayerDAO playerDao;
+	
+	
+	public PlayerServiceImpl() {
+	}
+
+	@Override
+	@Transactional
+	public List<Player> allPlayers() {
+		// begin
+		return playerDao.getPlayers();
+		// commit
+	}
+
+	@Override
+	@Transactional
+	public void savePlayer(Player player) {
+		playerDao.addPlayers(player);
+	}
+
+	@Override
+	@Transactional
+	public Player showPlayer(int id) {
+		return playerDao.getPlayer(id);
+	}
+
+	@Override
+	@Transactional
+	public int deletePlayer(int id) {
+		// TODO Auto-generated method stub
+		return playerDao.removePlayer(id);
+		
+	}
+
+}
